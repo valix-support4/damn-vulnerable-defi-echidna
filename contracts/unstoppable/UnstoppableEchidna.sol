@@ -4,12 +4,10 @@ import "../DamnValuableToken.sol";
 import "./UnstoppableLender.sol";
 import "./ReceiverUnstoppable.sol";
 
-/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract UnstoppableEchidna --config contracts/unstoppable/config.yaml
+/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna . --contract UnstoppableEchidna --config unstoppable.yaml
 contract UnstoppableEchidna {
     // We will send ETHER_IN_POOL to the flash loan pool.
     uint256 constant ETHER_IN_POOL = 1000000e18;
-    // We will send INITIAL_ATTACKER_BALANCE to the attacker (which is the deployer) of this contract.
-    uint256 constant INITIAL_ATTACKER_BALANCE = 100e18;
 
     DamnValuableToken token;
     UnstoppableLender pool;
@@ -20,7 +18,6 @@ contract UnstoppableEchidna {
         pool = new UnstoppableLender(address(token));
         token.approve(address(pool), ETHER_IN_POOL);
         pool.depositTokens(ETHER_IN_POOL);
-        token.transfer(msg.sender, INITIAL_ATTACKER_BALANCE);
     }
 
     // This is the callback function for flash loan receivers.

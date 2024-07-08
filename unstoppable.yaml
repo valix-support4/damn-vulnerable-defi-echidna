@@ -5,6 +5,6 @@ deployer: '0x30000'
 # Sender must be the same so that it can use the attacker balance to try to break the invariant. 
 sender: ['0x30000']
 # Allow for multi-abi use
-multi-abi: true
+# multi-abi: true
 # multi-abi was renamed in echidna >= 2.1
-allContracts: true
+# allContracts: true
